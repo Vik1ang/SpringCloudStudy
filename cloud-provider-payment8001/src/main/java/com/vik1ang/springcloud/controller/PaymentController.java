@@ -30,6 +30,7 @@ public class PaymentController<T> {
     public CommonResult getPaymentById(@PathVariable("id") Long id) {
         Payment payment = paymentService.getPaymentById(id);
         if (payment != null) {
+            log.info("123");
             return new CommonResult(200, "查询成功", payment);
         } else {
             return new CommonResult(444, "无对应记录, 查询Id: " + id);

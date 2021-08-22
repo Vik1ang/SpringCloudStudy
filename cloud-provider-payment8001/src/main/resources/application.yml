@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/spring_cloud_study
     username: root
-    password: root
+    password: seulgi
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
