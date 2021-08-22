@@ -2,10 +2,10 @@ package com.vik1ang.springcloud.controller;
 
 import com.vik1ang.springcloud.entities.CommonResult;
 import com.vik1ang.springcloud.entities.Payment;
-import com.vik1ang.springcloud.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import com.vik1ang.springcloud.service.PaymentService;
 
 import javax.annotation.Resource;
 
