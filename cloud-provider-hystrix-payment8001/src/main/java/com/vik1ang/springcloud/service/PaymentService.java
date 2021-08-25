@@ -1,5 +1,7 @@
 package com.vik1ang.springcloud.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
@@ -10,15 +12,25 @@ public class PaymentService {
         return "线程池: " + Thread.currentThread().getName() + " paymentInfoOk, id: " + id;
     }
 
+    @HystrixCommand(fallbackMethod = "paymentInfoTimeOutHandler", commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000")
+    })
     public String paymentInfoTimeout(Integer id) {
 
-        int sleep = 3;
+        int sleep = 3000;
         try {
-            TimeUnit.SECONDS.sleep(sleep);
+            TimeUnit.MILLISECONDS.sleep(sleep);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        return "线程池: " + Thread.currentThread().getName() + " paymentInfoTimeout, id: " + id + " using " + sleep + " seconds";
+        // int age = 10 / 0;
+
+        return "线程池: " + Thread.currentThread().getName() + " paymentInfoTimeout, id: " + id + " using " + sleep + " ms";
+    }
+
+    public String paymentInfoTimeOutHandler(Integer id) {
+        return "线程池: " + Thread.currentThread().getName() + " 8001 paymentInfoTimeOutHandler, id: " + id + "\t" + "crash";
+
     }
 }
